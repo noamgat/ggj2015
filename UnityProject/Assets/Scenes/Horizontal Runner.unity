@@ -300,6 +300,18 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 48dd31c7c6457d145852af58da8f75cc, type: 2}
+      propertyPath: obstacleCheck
+      value: 2000
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 48dd31c7c6457d145852af58da8f75cc, type: 2}
+      propertyPath: obstacleThreshold
+      value: .949999988
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 48dd31c7c6457d145852af58da8f75cc, type: 2}
+      propertyPath: obstacleSpeed
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 48dd31c7c6457d145852af58da8f75cc, type: 2}
   m_RootGameObject: {fileID: 1327899993}
@@ -404,7 +416,7 @@ MonoBehaviour:
   maximumTimeOfJump: .300000012
   minimumTimeOfJump: .100000001
   obstacleCheck: 2000
-  obstacleThreshold: .899999976
+  obstacleThreshold: .949999988
   obstacleSpeed: 5
 --- !u!114 &1327899996
 MonoBehaviour:

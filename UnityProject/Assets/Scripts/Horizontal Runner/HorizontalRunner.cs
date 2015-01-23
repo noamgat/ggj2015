@@ -49,7 +49,7 @@ public class HorizontalRunner : MonoBehaviour
 		//Debug.Log("Random: " + randomChance + "; Time Difference: " + (DateTime.Now.ToFileTimeUtc() - this.lastTime) / 10000);
 
 		GameObject obstacle = (GameObject)Instantiate(this.obstaclePrefab);
-		float randomSize = Random.Range(0.5f, 2f);
+		float randomSize = Random.Range(0.5f, 1.5f);
 		obstacle.transform.localScale = new Vector3(randomSize, randomSize);
 		obstacle.transform.localPosition = this.obstacleStart - new Vector3(0f, (1f - randomSize) / 2);
 		obstacle.GetComponent<Rigidbody>().AddForce(Vector3.left * this.obstacleSpeed, ForceMode.VelocityChange);
