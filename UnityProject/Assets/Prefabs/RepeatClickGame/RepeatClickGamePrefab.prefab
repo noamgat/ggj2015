@@ -11,7 +11,7 @@ GameObject:
   - 20: {fileID: 2002422}
   - 92: {fileID: 9202422}
   - 124: {fileID: 12402422}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -27,7 +27,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 402418}
   - 114: {fileID: 11402406}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: RepeatClickGamePrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -45,7 +45,7 @@ GameObject:
   - 223: {fileID: 22302422}
   - 114: {fileID: 11402408}
   - 114: {fileID: 11402410}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -62,7 +62,7 @@ GameObject:
   - 224: {fileID: 22402420}
   - 222: {fileID: 22202420}
   - 114: {fileID: 11402418}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Time Left Title
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -78,7 +78,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 402422}
   - 114: {fileID: 11402422}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Logic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -95,7 +95,7 @@ GameObject:
   - 224: {fileID: 22402422}
   - 222: {fileID: 22202422}
   - 114: {fileID: 11402420}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Time Left Value
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -165,7 +165,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 1024
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
