@@ -53,6 +53,7 @@ public class HorizontalRunner : MonoBehaviour
 		obstacle.transform.localScale = new Vector3(randomSize, randomSize);
 		obstacle.transform.localPosition = this.obstacleStart - new Vector3(0f, (1f - randomSize) / 2);
 		obstacle.GetComponent<Rigidbody>().AddForce(Vector3.left * this.obstacleSpeed, ForceMode.VelocityChange);
+		obstacle.GetComponent<Obstacle>().characterCollider = this.character.collider;
 
 		this.lastTime = DateTime.Now.ToFileTimeUtc();
 	}
