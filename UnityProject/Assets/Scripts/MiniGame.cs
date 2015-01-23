@@ -8,4 +8,8 @@ public class MiniGame : MonoBehaviour {
     [System.Serializable]
     public class MiniGameEvent : UnityEvent<MiniGame> { }
     public MiniGameEvent onLostLife;
+
+    public void NotifyLostLife() {
+        onLostLife.Invoke(this);
+    }
 }
