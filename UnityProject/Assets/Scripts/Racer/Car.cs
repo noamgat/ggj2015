@@ -2,20 +2,16 @@
 using System.Collections;
 
 public class Car : MonoBehaviour {
+    public Transform explosionPrefab;
+    public RacerManager manager;
 
-    public class ExampleClass : MonoBehaviour
+    void OnCollisionEnter(Collision collision)
     {
-        public Transform explosionPrefab;
-        public RacerManager manager;
-
-        void OnCollisionEnter(Collision collision)
-        {
-            ContactPoint contact = collision.contacts[0];
-            Quaternion rot = Quaternion.FromToRotation(Vector3.up, contact.normal);
-            Vector3 pos = contact.point;
-            Instantiate(explosionPrefab, pos, rot);
-            Destroy(collision.gameObject);
-            
-        }
+        ContactPoint contact = collision.contacts[0];
+        Quaternion rot = Quaternion.FromToRotation(Vector3.up, contact.normal);
+        Vector3 pos = contact.point;
+        Instantiate(explosionPrefab, pos, rot);
+        Destroy(collision.gameObject);
+        manager.miniGame.NotifyLostLife();
     }
 }
