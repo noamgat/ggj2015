@@ -11,6 +11,7 @@ public class RepeatClickGameController : MonoBehaviour {
     private float timeUntilLostLife;
     private float selectedTimeToLive;
     public float respawnDuration = 1.5f;
+    public RectTransform livesContainer;
 
     //1 = Safe, 0 = Dead
     public float relativeSafety { get; private set; }
@@ -59,5 +60,11 @@ public class RepeatClickGameController : MonoBehaviour {
 
     private void ResetTimer() {
         timeUntilLostLife = selectedTimeToLive;	
+    }
+
+    public void OnNumLivesChanged(int numLives) {
+        for (int i = 0; i < livesContainer.childCount; i++) {
+            livesContainer.GetChild(i).gameObject.SetActive(i < numLives);
+        }
     }
 }
