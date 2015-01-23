@@ -1,73 +1,52 @@
 fileFormatVersion: 2
-<<<<<<< HEAD
 guid: 6e380654cbc55594ca3badb4ea475ec4
-=======
-guid: 8a96a751e472b24409578b53bf16b919
->>>>>>> Life reducing in racer
 ModelImporter:
   serializedVersion: 16
   fileIDToRecycleName:
-    100000: //RootNode
-    100002: Plane
-<<<<<<< HEAD
-    400000: //RootNode
-    400002: Plane
-=======
-    100004: Armature
-    100006: Bone
-    100008: Bone_001
-    100010: Bone_002
-    100012: Bone_002_L
-    100014: Bone_002_L_001
-    100016: Bone_002_L_002
-    100018: Bone_002_R
-    100020: Bone_002_R_001
-    100022: Bone_002_R_002
-    100024: Bone_003
-    100026: Bone_005
-    100028: Bone_L_001
-    100030: Bone_L_002
-    100032: Bone_R_001
-    100034: Bone_R_002
-    100036: Cube
-    400000: //RootNode
-    400002: Plane
-    400004: Armature
-    400006: Bone
-    400008: Bone_001
-    400010: Bone_002
-    400012: Bone_002_L
-    400014: Bone_002_L_001
-    400016: Bone_002_L_002
-    400018: Bone_002_R
-    400020: Bone_002_R_001
-    400022: Bone_002_R_002
-    400024: Bone_003
-    400026: Bone_005
-    400028: Bone_L_001
-    400030: Bone_L_002
-    400032: Bone_R_001
-    400034: Bone_R_002
-    400036: Cube
->>>>>>> Life reducing in racer
-    2300000: //RootNode
-    2300002: Plane
-    3300000: //RootNode
-    3300002: Plane
+    100000: Armature
+    100002: Bone
+    100004: Bone_001
+    100006: Bone_002
+    100008: Bone_002_L
+    100010: Bone_002_L_001
+    100012: Bone_002_L_002
+    100014: Bone_002_R
+    100016: Bone_002_R_001
+    100018: Bone_002_R_002
+    100020: Bone_003
+    100022: Bone_005
+    100024: Bone_L_001
+    100026: Bone_L_002
+    100028: Bone_R_001
+    100030: Bone_R_002
+    100032: Cube
+    100034: //RootNode
+    100036: Plane
+    400000: Armature
+    400002: Bone
+    400004: Bone_001
+    400006: Bone_002
+    400008: Bone_002_L
+    400010: Bone_002_L_001
+    400012: Bone_002_L_002
+    400014: Bone_002_R
+    400016: Bone_002_R_001
+    400018: Bone_002_R_002
+    400020: Bone_003
+    400022: Bone_005
+    400024: Bone_L_001
+    400026: Bone_L_002
+    400028: Bone_R_001
+    400030: Bone_R_002
+    400032: Cube
+    400034: //RootNode
+    400036: Plane
     4300000: Cube
     4300002: Plane
-    7400000: Cube|PlaneAction
-    7400002: Cube|PlaneAction.001
-    7400004: Plane|PlaneAction
-    7400006: Plane|PlaneAction.001
-<<<<<<< HEAD
-    9500000: //RootNode
-=======
-    7400008: ArmatureAction
+    7400000: ArmatureAction
     9500000: //RootNode
     13700000: Cube
     13700002: Plane
->>>>>>> Life reducing in racer
   materials:
     importMaterials: 1
     materialName: 0
@@ -83,13 +62,6 @@ ModelImporter:
     animationScaleError: .5
     animationWrapMode: 0
     extraExposedTransformPaths: []
-<<<<<<< HEAD
-    clipAnimations: []
-    isReadable: 1
-  meshes:
-    lODScreenPercentages: []
-    globalScale: .00999999978
-=======
     clipAnimations:
     - serializedVersion: 16
       name: ArmatureAction
@@ -158,8 +130,7 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: .699999988
->>>>>>> Life reducing in racer
+    globalScale: .800000012
     meshCompression: 0
     addColliders: 0
     importBlendShapes: 1
