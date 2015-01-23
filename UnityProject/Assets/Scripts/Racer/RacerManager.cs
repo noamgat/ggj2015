@@ -13,6 +13,8 @@ public class RacerManager : MonoBehaviour {
     public Transform leftPosition;
     public Transform rightPosition;
 
+    public MiniGame miniGame;
+
     void Start()
     {
         car.transform.position = rightPosition.position;
