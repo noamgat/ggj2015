@@ -115,7 +115,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   miniGamePrefabs:
   - {fileID: 11402406, guid: 3066f6ad57b731b4cb33d2e501b2cb1f, type: 2}
-  - {fileID: 11410890, guid: 737fd857497cf6f4cb55f8b0db5e80f5, type: 2}
+  - {fileID: 11402406, guid: 3066f6ad57b731b4cb33d2e501b2cb1f, type: 2}
   - {fileID: 11402406, guid: 3066f6ad57b731b4cb33d2e501b2cb1f, type: 2}
   - {fileID: 11410890, guid: 737fd857497cf6f4cb55f8b0db5e80f5, type: 2}
   numLives: 5
