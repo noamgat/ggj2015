@@ -21,7 +21,6 @@ public class HorizontalRunner : MonoBehaviour
 	private bool jumping;
 	private bool allowPress = true;
 	private bool killJump;
-
 	private long lastTime = 0;
 
 	// ReSharper disable once UnusedMember.Local
@@ -40,7 +39,38 @@ public class HorizontalRunner : MonoBehaviour
 			this.characterRigidBody.AddForce(Vector3.up * this.jumpHeightModifier * this.jumpTime, ForceMode.Force);
 		}
 	}
-	
+
+	private void HandleJump()
+	{
+		this.killJump = this.jumpTime < 0 || InputManager.GetButtonUp || this.killJump;
+
+		//Debug.Log(string.Format("Allowed: {0}; Jumping: {1}; KillJump: {5}; JumpTime: {2}\n" +
+		//						"OriginalY: {3}; Y: {4};", 
+		//						this.allowPress, this.jumping, this.jumpTime, this.originalY,
+		//						this.character.transform.localPosition.y, killJump));
+
+		// respond to click
+		if (InputManager.GetButtonDown && this.jumpTime > 0 && this.allowPress)
+		{
+			this.jumping = true;
+		}
+
+		// kill the jump
+		if (this.killJump && this.jumpTime + this.minimumTimeOfJump < this.maximumTimeOfJump)
+		{
+			this.jumping = false;
+			this.allowPress = false;
+		}
+
+		// when the character lands, enable jump again
+		if (Math.Abs(this.character.transform.localPosition.y - this.originalY) < 0.001)
+		{
+			this.jumpTime = this.maximumTimeOfJump;
+			this.allowPress = true;
+			this.killJump = false;
+		}
+	}
+
 	void RandomObstacle()
 	{
 		float randomChance = Random.Range(0f, 1f);
@@ -49,6 +79,7 @@ public class HorizontalRunner : MonoBehaviour
 		//Debug.Log("Random: " + randomChance + "; Time Difference: " + (DateTime.Now.ToFileTimeUtc() - this.lastTime) / 10000);
 
 		GameObject obstacle = (GameObject)Instantiate(this.obstaclePrefab);
+		obstacle.transform.parent = this.transform;
 		float randomSize = Random.Range(0.5f, 1.5f);
 		obstacle.transform.localScale = new Vector3(randomSize, randomSize);
 		obstacle.transform.localPosition = this.obstacleStart - new Vector3(0f, (1f - randomSize) / 2);
@@ -58,35 +89,11 @@ public class HorizontalRunner : MonoBehaviour
 		this.lastTime = DateTime.Now.ToFileTimeUtc();
 	}
 
-	// ReSharper disable once UnusedMember.Local
-	void Update () 
+	void Update ()
 	{
-		this.killJump = this.jumpTime < 0 || InputManager.GetButtonUp || killJump;
-
-		//Debug.Log(string.Format("Allowed: {0}; Jumping: {1}; KillJump: {5}; JumpTime: {2}\n" +
-		//						"OriginalY: {3}; Y: {4};", 
-		//						this.allowPress, this.jumping, this.jumpTime, this.originalY,
-		//						this.character.transform.localPosition.y, killJump));
-
-		// respond to click
-		if (InputManager.GetButtonDown && this.jumpTime > 0 && this.allowPress)
-		{ this.jumping = true; }
-
-		// kill the jump
-		if (this.killJump && this.jumpTime + this.minimumTimeOfJump < this.maximumTimeOfJump)
-		{
-			this.jumping = false;
-			this.allowPress = false;
-		}
-		
-		// when the character lands, enable jump again
-		if (Math.Abs(this.character.transform.localPosition.y - this.originalY) < 0.001)
-		{
-			this.jumpTime = this.maximumTimeOfJump;
-			this.allowPress = true;
-			this.killJump = false;
-		}
+		this.HandleJump();
 
 		this.RandomObstacle();
 	}
+
 }
