@@ -10,6 +10,10 @@ public class RepeatClickGameController : MonoBehaviour {
     public float clickBoost = 3f;
     private float timeUntilLostLife;
     private float selectedTimeToLive;
+
+    //1 = Safe, 0 = Dead
+    public float relativeSafety { get; private set; }
+
 	// Use this for initialization
 	void Start () {
         selectedTimeToLive = initialTimeToLive * Random.Range(1f, 2f);
@@ -30,6 +34,7 @@ public class RepeatClickGameController : MonoBehaviour {
             ResetTimer();
         }
         timeLeftText.text = timeUntilLostLife.ToString("0.0");
+        relativeSafety = timeUntilLostLife / selectedTimeToLive;
 	}
 
 
