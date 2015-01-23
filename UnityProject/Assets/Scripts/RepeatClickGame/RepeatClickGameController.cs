@@ -19,7 +19,7 @@ public class RepeatClickGameController : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-        if (Input.GetButtonDown("Fire1")) {
+        if (InputManager.GetButtonDown) {
             timeUntilLostLife += clickBoost;
             timeUntilLostLife = Mathf.Min(timeUntilLostLife, selectedTimeToLive);
             return;
