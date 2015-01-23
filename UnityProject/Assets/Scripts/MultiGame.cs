@@ -88,7 +88,7 @@ public class MultiGame : MonoBehaviour {
         numLives--;
         Debug.Log("Lost life!");
         for (int i = 0; i < miniGames.Length; i++) {
-            miniGames[i].NotifyLifeTotalChanged(numLives);
+            if (miniGames[i] != null) miniGames[i].NotifyLifeTotalChanged(numLives);
         }
         if (numLives == 0) {
             Debug.Log("You Lose!");
