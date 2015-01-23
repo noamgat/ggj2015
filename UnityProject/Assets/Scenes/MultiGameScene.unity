@@ -114,10 +114,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   miniGamePrefabs:
-  - {fileID: 11402406, guid: 3066f6ad57b731b4cb33d2e501b2cb1f, type: 2}
-  - {fileID: 11402406, guid: 3066f6ad57b731b4cb33d2e501b2cb1f, type: 2}
-  - {fileID: 11402406, guid: 3066f6ad57b731b4cb33d2e501b2cb1f, type: 2}
+  - {fileID: 11400002, guid: 48dd31c7c6457d145852af58da8f75cc, type: 2}
   - {fileID: 11410890, guid: 737fd857497cf6f4cb55f8b0db5e80f5, type: 2}
+  - {fileID: 11402406, guid: 3066f6ad57b731b4cb33d2e501b2cb1f, type: 2}
   numLives: 5
   minigameViewports:
   - serializedVersion: 2
@@ -133,11 +132,6 @@ MonoBehaviour:
   - serializedVersion: 2
     x: .5
     y: 0
-    width: .5
-    height: .5
-  - serializedVersion: 2
-    x: .5
-    y: .5
     width: .5
     height: .5
 --- !u!1001 &290015302
@@ -202,7 +196,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!81 &1120795139
 AudioListener:
   m_ObjectHideFlags: 0
