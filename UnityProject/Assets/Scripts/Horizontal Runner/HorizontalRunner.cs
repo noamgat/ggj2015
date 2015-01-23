@@ -6,6 +6,7 @@ public class HorizontalRunner : MonoBehaviour
 {
 	public GameObject character = null;
 	public Rigidbody characterRigidBody = null;
+	public Animator characterAnimator = null;
 	public MiniGame miniGame = null;
 	public GameObject obstaclePrefab = null;
 	public Vector3 obstacleStart = new Vector3(4f, 0.98f, 0f);
@@ -53,6 +54,7 @@ public class HorizontalRunner : MonoBehaviour
 		if (InputManager.GetButtonDown && this.jumpTime > 0 && this.allowPress)
 		{
 			this.jumping = true;
+			this.characterAnimator.SetTrigger("Jump");
 		}
 
 		// kill the jump
@@ -62,12 +64,16 @@ public class HorizontalRunner : MonoBehaviour
 			this.allowPress = false;
 		}
 
+		if (Math.Sign(this.characterRigidBody.velocity.y) == -1)
+		{ this.characterAnimator.SetBool("Descending", true); }
+
 		// when the character lands, enable jump again
 		if (Math.Abs(this.character.transform.localPosition.y - this.originalY) < 0.001)
 		{
 			this.jumpTime = this.maximumTimeOfJump;
 			this.allowPress = true;
 			this.killJump = false;
+			this.characterAnimator.SetBool("Descending", false);
 		}
 	}
 
