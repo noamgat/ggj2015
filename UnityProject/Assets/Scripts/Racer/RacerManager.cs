@@ -10,14 +10,18 @@ public class RacerManager : MonoBehaviour {
 
     public GameObject car;
 
+    public Vector3 targetPosition;
     public Transform leftPosition;
     public Transform rightPosition;
+
+    public float switchSpeed;
 
     public MiniGame miniGame;
 
     void Start()
     {
         car.transform.position = rightPosition.position;
+        targetPosition = car.transform.position;
     }
 
 	// Update is called once per frame
@@ -30,10 +34,12 @@ public class RacerManager : MonoBehaviour {
         if (carPosition != lastCarPosition)
         {
             if (carPosition == Position.Left)
-                car.transform.position = leftPosition.position;
+                targetPosition = leftPosition.position;
             else
-                car.transform.position = rightPosition.position;
+                targetPosition = rightPosition.position;
             lastCarPosition = carPosition;
         }
+
+        car.transform.position = new Vector3(Mathf.Lerp(car.transform.position.x, targetPosition.x, Time.deltaTime * switchSpeed), car.transform.position.y, car.transform.position.z);
 	}
 }
