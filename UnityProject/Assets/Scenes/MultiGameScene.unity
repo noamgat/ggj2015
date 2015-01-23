@@ -118,22 +118,44 @@ MonoBehaviour:
   - {fileID: 11410890, guid: 737fd857497cf6f4cb55f8b0db5e80f5, type: 2}
   - {fileID: 11402406, guid: 3066f6ad57b731b4cb33d2e501b2cb1f, type: 2}
   numLives: 5
-  minigameViewports:
-  - serializedVersion: 2
-    x: 0
-    y: 0
-    width: .5
-    height: .5
-  - serializedVersion: 2
-    x: 0
-    y: .5
-    width: .5
-    height: .5
-  - serializedVersion: 2
-    x: .5
-    y: 0
-    width: .5
-    height: .5
+  transitionDuration: 2
+  stageConfigurations:
+  - minigameViewports:
+    - serializedVersion: 2
+      x: 0
+      y: 0
+      width: 1
+      height: 1
+    timeInStage: 15
+  - minigameViewports:
+    - serializedVersion: 2
+      x: 0
+      y: 0
+      width: 1
+      height: .5
+    - serializedVersion: 2
+      x: 0
+      y: .5
+      width: 1
+      height: .5
+    timeInStage: 15
+  - minigameViewports:
+    - serializedVersion: 2
+      x: 0
+      y: 0
+      width: 1
+      height: .5
+    - serializedVersion: 2
+      x: 0
+      y: .5
+      width: .5
+      height: .5
+    - serializedVersion: 2
+      x: .5
+      y: .5
+      width: .5
+      height: .5
+    timeInStage: 5000
 --- !u!1001 &290015302
 Prefab:
   m_ObjectHideFlags: 0
