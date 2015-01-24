@@ -322,7 +322,7 @@ GameObject:
   m_Component:
   - 224: {fileID: 22400000}
   - 114: {fileID: 11400010}
-  m_Layer: 10
+  m_Layer: 9
   m_Name: Lives
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -339,7 +339,7 @@ GameObject:
   - 224: {fileID: 22400002}
   - 222: {fileID: 22200000}
   - 114: {fileID: 11400012}
-  m_Layer: 10
+  m_Layer: 9
   m_Name: Life 5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -356,7 +356,7 @@ GameObject:
   - 224: {fileID: 22400004}
   - 222: {fileID: 22200002}
   - 114: {fileID: 11400014}
-  m_Layer: 10
+  m_Layer: 9
   m_Name: Life 4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -373,7 +373,7 @@ GameObject:
   - 224: {fileID: 22400006}
   - 222: {fileID: 22200004}
   - 114: {fileID: 11400016}
-  m_Layer: 10
+  m_Layer: 9
   m_Name: Life 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -390,7 +390,7 @@ GameObject:
   - 224: {fileID: 22400008}
   - 222: {fileID: 22200006}
   - 114: {fileID: 11400018}
-  m_Layer: 10
+  m_Layer: 9
   m_Name: Time Left Value
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -407,7 +407,7 @@ GameObject:
   - 224: {fileID: 22400010}
   - 222: {fileID: 22200008}
   - 114: {fileID: 11400020}
-  m_Layer: 10
+  m_Layer: 9
   m_Name: Life 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -424,7 +424,7 @@ GameObject:
   - 224: {fileID: 22400012}
   - 222: {fileID: 22200010}
   - 114: {fileID: 11400022}
-  m_Layer: 10
+  m_Layer: 9
   m_Name: Time Left Title
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -441,7 +441,7 @@ GameObject:
   - 224: {fileID: 22400014}
   - 222: {fileID: 22200012}
   - 114: {fileID: 11400024}
-  m_Layer: 10
+  m_Layer: 9
   m_Name: Life 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -459,7 +459,7 @@ GameObject:
   - 223: {fileID: 22300000}
   - 114: {fileID: 11400026}
   - 114: {fileID: 11400028}
-  m_Layer: 10
+  m_Layer: 9
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -923,6 +923,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ownCamera: {fileID: 2000000}
   miniGame: {fileID: 11400002}
+  livesContainer: {fileID: 22400000}
   character: {fileID: 100010}
   characterRigidBody: {fileID: 5400002}
   characterAnimator: {fileID: 9500000}
@@ -934,6 +935,8 @@ MonoBehaviour:
   obstacleCheck: 2000
   obstacleThreshold: .949999988
   obstacleSpeed: 5
+  characterFlickerTime: 1
+  characterFlickerFrequency: .100000001
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -948,12 +951,36 @@ MonoBehaviour:
   mainCamera: {fileID: 2000000}
   onLostLife:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 11400000}
+        m_MethodName: OnLostLife
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine, Version=0.0.0.0,
+            Culture=neutral, PublicKeyToken=null
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: MiniGame+MiniGameEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
   onNumLivesChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 11400000}
+        m_MethodName: OnNumLivesChanged
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine, Version=0.0.0.0,
+            Culture=neutral, PublicKeyToken=null
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: MiniGame+LifeChangeEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
 --- !u!114 &11400004
@@ -1040,7 +1067,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Sprite: {fileID: 21300000, guid: 1d404b2ea334dde46b666f688a01cb96, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b5fae56bfcee02944a49dd9bdffd017e, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -1061,7 +1088,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Sprite: {fileID: 21300000, guid: 1d404b2ea334dde46b666f688a01cb96, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b5fae56bfcee02944a49dd9bdffd017e, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -1082,7 +1109,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Sprite: {fileID: 21300000, guid: 1d404b2ea334dde46b666f688a01cb96, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b5fae56bfcee02944a49dd9bdffd017e, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -1129,7 +1156,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Sprite: {fileID: 21300000, guid: 1d404b2ea334dde46b666f688a01cb96, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b5fae56bfcee02944a49dd9bdffd017e, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -1176,7 +1203,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Sprite: {fileID: 21300000, guid: 1d404b2ea334dde46b666f688a01cb96, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b5fae56bfcee02944a49dd9bdffd017e, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -1199,8 +1226,8 @@ MonoBehaviour:
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 960, y: 540}
-  m_ScreenMatchMode: 1
-  m_MatchWidthOrHeight: 0
+  m_ScreenMatchMode: 0
+  m_MatchWidthOrHeight: 1
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -1500,14 +1527,14 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 2
   m_RenderMode: 1
-  m_Camera: {fileID: 0}
-  m_PlaneDistance: 100
+  m_Camera: {fileID: 2000000}
+  m_PlaneDistance: 1
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 5
 --- !u!224 &22400000
 RectTransform:
   m_ObjectHideFlags: 1

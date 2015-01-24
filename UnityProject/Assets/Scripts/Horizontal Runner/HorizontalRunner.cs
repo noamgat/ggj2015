@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -6,6 +7,7 @@ public class HorizontalRunner : MonoBehaviour
 {
 	public Camera ownCamera = null;
 	public MiniGame miniGame = null;
+	public RectTransform livesContainer = null;
 	public GameObject character = null;
 	public Rigidbody characterRigidBody = null;
 	public Animator characterAnimator = null;
@@ -17,6 +19,8 @@ public class HorizontalRunner : MonoBehaviour
 	public int obstacleCheck = 1000; // in milliseconds
 	public float obstacleThreshold = 0.8f;
 	public float obstacleSpeed = 5f;
+	public float characterFlickerTime = 1f;
+	public float characterFlickerFrequency = 0.1f;
 
 	private float jumpTime;
 	private float originalY;
@@ -106,5 +110,37 @@ public class HorizontalRunner : MonoBehaviour
 		this.RandomObstacle();
 
 		this.ownCamera.transform.localPosition = new Vector3((1f - this.ownCamera.rect.height) * 14f, 4f, -10f);
+	}
+
+	// ReSharper disable once UnusedMember.Global
+	public void OnNumLivesChanged(int numLives)
+	{
+		for (int i = 0; i < this.livesContainer.childCount; i++)
+		{ this.livesContainer.GetChild(i).gameObject.SetActive(i < numLives); }
+	}
+
+	private IEnumerator FlickerCharacter()
+	{
+		SpriteRenderer spriteRenderer = this.character.GetComponentInChildren<SpriteRenderer>();
+		float flickerTime = this.characterFlickerTime;
+
+		while (flickerTime > 0)
+		{
+			spriteRenderer.color = Mathf.RoundToInt(flickerTime / this.characterFlickerFrequency) % 2 == 0 ?
+									Color.white : Color.red;
+			flickerTime -= Time.deltaTime;
+			yield return null;
+		}
+
+		this.character.GetComponentInChildren<SpriteRenderer>().color = Color.white;
+	}
+
+	// ReSharper disable once UnusedMember.Global
+	public void OnLostLife()
+	{
+		Debug.Log("Horizontal Runner: Lost Life.");
+		StopCoroutine(this.FlickerCharacter());
+		this.character.GetComponentInChildren<SpriteRenderer>().color = Color.white;
+		StartCoroutine(this.FlickerCharacter());
 	}
 }
