@@ -29,6 +29,8 @@ public class RacerManager : MonoBehaviour {
 
     public GameObject ground;
 
+    public RectTransform livesContainer;
+
     void Start()
     {
         car.transform.position = rightPosition.position;
@@ -79,5 +81,13 @@ public class RacerManager : MonoBehaviour {
             );
         
         (Instantiate(obstaclePrefabs[Random.Range(0, obstaclePrefabs.Count)], newPosition, Quaternion.identity) as GameObject).transform.parent = ground.transform;
+    }
+
+    public void OnNumLivesChanged(int numLives)
+    {
+        for (int i = 0; i < livesContainer.childCount; i++)
+        {
+            livesContainer.GetChild(i).gameObject.SetActive(i < numLives);
+        }
     }
 }
