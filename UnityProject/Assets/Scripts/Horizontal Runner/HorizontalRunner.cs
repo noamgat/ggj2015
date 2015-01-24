@@ -12,6 +12,8 @@ public class HorizontalRunner : MonoBehaviour
 	public GameObject character = null;
 	public Rigidbody characterRigidBody = null;
 	public Animator characterAnimator = null;
+	public AudioSource characterHitAudioSource = null;
+	public AudioSource characterJumpAudioSource = null;
 	public GameObject[] obstaclePrefabs = null;
 	public float obstacleStart = 26f;
 	public float jumpHeightModifier = 200f;
@@ -19,6 +21,7 @@ public class HorizontalRunner : MonoBehaviour
 	public float minimumTimeOfJump = 0.1f;
 	public int obstacleCheckMin = 1000; // in milliseconds
 	public int obstacleCheckMax = 5000;
+	public int perObstacleMaxDegredationRate = 100;
 	public float obstacleSpeed = 5f;
 	public float characterFlickerTime = 1f;
 	public float characterFlickerFrequency = 0.1f;
@@ -53,6 +56,9 @@ public class HorizontalRunner : MonoBehaviour
 	private void HandleJump()
 	{
 		this.killJump = this.jumpTime < 0 || !InputManager.GetButtonHeld || this.killJump;
+
+		if (InputManager.GetButtonDown)
+		{ this.characterJumpAudioSource.Play(); }
 
 		//Debug.Log(string.Format("Allowed: {0}; Jumping: {1}; KillJump: {5}; JumpTime: {2}\n" +
 		//						"OriginalY: {3}; Y: {4};", 
@@ -100,8 +106,14 @@ public class HorizontalRunner : MonoBehaviour
 		Obstacle obstacle = obstacleObject.GetComponent<Obstacle>();
 		obstacle.characterCollider = this.character.collider;
 		obstacle.miniGame = this.miniGame;
+		obstacle.characterAudioSource = this.characterHitAudioSource;
 
 		this.lastTime = DateTime.Now.ToFileTimeUtc() + Random.Range(this.obstacleCheckMin, this.obstacleCheckMax) * 10000;
+		this.obstacleCheckMax -= this.perObstacleMaxDegredationRate;
+		if (this.obstacleCheckMax < 0)
+		{ this.obstacleCheckMax = 0; }
+		if (this.obstacleCheckMax < this.obstacleCheckMin)
+		{ this.obstacleCheckMin = this.obstacleCheckMax; }
 	}
 
 	// ReSharper disable once UnusedMember.Local

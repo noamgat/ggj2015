@@ -4,6 +4,7 @@ public class Obstacle : MonoBehaviour
 {
 	public Collider characterCollider;
 	public MiniGame miniGame;
+	public AudioSource characterAudioSource;
 	public ParticleSystem particles = null;
 	public float leftEdgeDestructionThreshold = -11f;
 
@@ -23,6 +24,7 @@ public class Obstacle : MonoBehaviour
 			this.particles.Play(); 
 			this.miniGame.NotifyLostLife();
 			this.collider.enabled = false;
+			this.characterAudioSource.Play();
 		}
 	}
 }
