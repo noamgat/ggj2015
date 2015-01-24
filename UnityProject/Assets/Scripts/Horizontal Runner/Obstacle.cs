@@ -2,26 +2,26 @@
 
 public class Obstacle : MonoBehaviour 
 {
-	public Collider characterCollider = null;
+	public Collider characterCollider;
+	public MiniGame miniGame;
 	public ParticleSystem particles = null;
 	public float leftEdgeDestructionThreshold = -11f;
 
-	// Use this for initialization
-	void Start () 
-	{
-		
-	}
-	
 	// Update is called once per frame
+	// ReSharper disable once UnusedMember.Local
 	void Update () 
 	{
 		if (this.transform.localPosition.x < this.leftEdgeDestructionThreshold)
 		{ Destroy(this.gameObject); }
 	}
 
+	// ReSharper disable once UnusedMember.Local
 	void OnTriggerEnter(Collider collider)
 	{
 		if (collider == this.characterCollider)
-		{ this.particles.Play(); }
+		{
+			this.particles.Play(); 
+			this.miniGame.NotifyLostLife();
+		}
 	}
 }

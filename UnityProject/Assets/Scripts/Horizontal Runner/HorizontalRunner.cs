@@ -7,7 +7,6 @@ public class HorizontalRunner : MonoBehaviour
 	public GameObject character = null;
 	public Rigidbody characterRigidBody = null;
 	public Animator characterAnimator = null;
-	public MiniGame miniGame = null;
 	public GameObject obstaclePrefab = null;
 	public Vector3 obstacleStart = new Vector3(4f, 0.98f, 0f);
 	public float jumpHeightModifier = 200f;
@@ -22,7 +21,7 @@ public class HorizontalRunner : MonoBehaviour
 	private bool jumping;
 	private bool allowPress = true;
 	private bool killJump;
-	private long lastTime = 0;
+	private long lastTime;
 
 	// ReSharper disable once UnusedMember.Local
 	void Start () 
@@ -84,22 +83,24 @@ public class HorizontalRunner : MonoBehaviour
 		{ return; }
 		//Debug.Log("Random: " + randomChance + "; Time Difference: " + (DateTime.Now.ToFileTimeUtc() - this.lastTime) / 10000);
 
-		GameObject obstacle = (GameObject)Instantiate(this.obstaclePrefab);
-		obstacle.transform.parent = this.transform;
+		GameObject obstacleObject = (GameObject)Instantiate(this.obstaclePrefab);
+		obstacleObject.transform.parent = this.transform;
 		float randomSize = Random.Range(0.5f, 1.5f);
-		obstacle.transform.localScale = new Vector3(randomSize, randomSize);
-		obstacle.transform.localPosition = this.obstacleStart - new Vector3(0f, (1f - randomSize) / 2);
-		obstacle.GetComponent<Rigidbody>().AddForce(Vector3.left * this.obstacleSpeed, ForceMode.VelocityChange);
-		obstacle.GetComponent<Obstacle>().characterCollider = this.character.collider;
+		obstacleObject.transform.localScale = new Vector3(randomSize, randomSize);
+		obstacleObject.transform.localPosition = this.obstacleStart - new Vector3(0f, (1f - randomSize) / 2);
+		obstacleObject.GetComponent<Rigidbody>().AddForce(Vector3.left * this.obstacleSpeed, ForceMode.VelocityChange);
+		Obstacle obstacle = obstacleObject.GetComponent<Obstacle>();
+		obstacle.characterCollider = this.character.collider;
+		obstacle.miniGame = this.character.GetComponent<MiniGame>();
 
 		this.lastTime = DateTime.Now.ToFileTimeUtc();
 	}
 
+	// ReSharper disable once UnusedMember.Local
 	void Update ()
 	{
 		this.HandleJump();
 
 		this.RandomObstacle();
 	}
-
 }
