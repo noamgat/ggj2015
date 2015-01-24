@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 public class MultiGame : MonoBehaviour {
 
@@ -8,12 +9,15 @@ public class MultiGame : MonoBehaviour {
     private MiniGame[] miniGames;
     public int numLives = 5;
     public float transitionDuration = 2f;
+    public float instructionTextTime = 5f;
+    public RectTransform instructionText;
 
     [System.Serializable]
     public class StageConfiguration
     {
         public Rect[] minigameViewports;
         public float timeInStage;
+        public string instructionText;
     }
 
     public StageConfiguration[] stageConfigurations;
@@ -66,6 +70,9 @@ public class MultiGame : MonoBehaviour {
                 miniGames[i].mainCamera.rect = config.minigameViewports[i];
                 miniGames[i].onLostLife.AddListener(this.OnMiniGameLostLife);
                 miniGames[i].NotifyLifeTotalChanged(numLives);
+                instructionText.gameObject.SetActive(true);
+                instructionText.GetComponentInChildren<Text>().text = config.instructionText;
+                this.ExecuteWithDelay(instructionTextTime, delegate() { instructionText.gameObject.SetActive(false); });
             } else {
                 Rect rect;
                 if (inTransition) {
