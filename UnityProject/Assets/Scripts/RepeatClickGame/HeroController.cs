@@ -7,12 +7,18 @@ public class HeroController : MonoBehaviour {
     public float safeX;
     public float deadX;
     public RepeatClickGameController gameController;
+    public float safeScale = 3f;
+    public float deadScale = 1.25f;
+    public Transform heroAvatar;
 
 	// Update is called once per frame
 	void LateUpdate () {
         Vector3 localPos = hero.localPosition;
-        localPos.x = Mathf.Lerp(deadX, safeX, gameController.relativeSafety);
+        float relativePosition = gameController.relativeSafety;
+        localPos.x = Mathf.Lerp(deadX, safeX, relativePosition);
         hero.localPosition = localPos;
+        float scale = Mathf.Lerp(deadScale, safeScale, relativePosition);
+        heroAvatar.localScale = new Vector3(scale, scale, scale);
 	}
 
     public void OnLostLife() {

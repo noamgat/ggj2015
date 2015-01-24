@@ -6,8 +6,8 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: road
-  m_Shader: {fileID: 4800000, guid: 46147f5f2856d874ea570c17db8a1966, type: 3}
+  m_Name: heroShadow
+  m_Shader: {fileID: 4800000, guid: c478c11f5a8febd4c971494d7b85cfe9, type: 3}
   m_ShaderKeywords: []
   m_CustomRenderQueue: -1
   m_SavedProperties:
@@ -17,12 +17,12 @@ Material:
         first:
           name: _MainTex
         second:
-          m_Texture: {fileID: 2800000, guid: dbd3ae1e7097fff4b8d31bdaa974f4fc, type: 3}
-          m_Scale: {x: 1, y: 50}
-          m_Offset: {x: 0, y: .5}
+          m_Texture: {fileID: 2800000, guid: ad933700abff69647b2e464d2f422f9b, type: 3}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
     m_Floats: {}
     m_Colors:
       data:
         first:
           name: _Color
-        second: {r: 1, g: 1, b: 1, a: 1}
+        second: {r: 1, g: 1, b: 1, a: .65882355}
