@@ -92,7 +92,7 @@ public class MultiGame : MonoBehaviour {
         }
         if (numLives == 0) {
             Debug.Log("You Lose!");
-            Time.timeScale = 0;
+            Application.LoadLevel("EndScene");
         }
     }
 }
