@@ -927,6 +927,8 @@ MonoBehaviour:
   character: {fileID: 100010}
   characterRigidBody: {fileID: 5400002}
   characterAnimator: {fileID: 9500000}
+  characterHitAudioSource: {fileID: 0}
+  characterJumpAudioSource: {fileID: 0}
   obstaclePrefabs:
   - {fileID: 100000, guid: d37029afd5469a84081feea823ed7395, type: 2}
   - {fileID: 100000, guid: 34dd5e88d8b019c41838d990851beb75, type: 2}
@@ -938,7 +940,8 @@ MonoBehaviour:
   maximumTimeOfJump: .300000012
   minimumTimeOfJump: .0500000007
   obstacleCheckMin: 2000
-  obstacleCheckMax: 5000
+  obstacleCheckMax: 7000
+  perObstacleMaxDegredationRate: 100
   obstacleSpeed: 5
   characterFlickerTime: 1
   characterFlickerFrequency: .100000001
@@ -1248,6 +1251,7 @@ MonoBehaviour:
   m_Script: {fileID: 1301386320, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_Priority: 3
   ignoreReversedGraphics: 1
   blockingObjects: 0
   m_BlockingMask:
