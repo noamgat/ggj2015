@@ -17,8 +17,8 @@ public class HorizontalRunner : MonoBehaviour
 	public float jumpHeightModifier = 200f;
 	public float maximumTimeOfJump = 0.3f; // in seconds
 	public float minimumTimeOfJump = 0.1f;
-	public int obstacleCheck = 1000; // in milliseconds
-	public float obstacleThreshold = 0.8f;
+	public int obstacleCheckMin = 1000; // in milliseconds
+	public int obstacleCheckMax = 5000;
 	public float obstacleSpeed = 5f;
 	public float characterFlickerTime = 1f;
 	public float characterFlickerFrequency = 0.1f;
@@ -89,11 +89,7 @@ public class HorizontalRunner : MonoBehaviour
 
 	private void RandomObstacle()
 	{
-		if (DateTime.Now.ToFileTimeUtc() - this.lastTime < this.obstacleCheck * 10000)
-		{ return; }
-		float randomChance = Random.Range(0f, 1f);
-		//Debug.Log(string.Format("Horizontal Runner: Chance of Obstacle is {0}", randomChance));
-		if (randomChance < this.obstacleThreshold)
+		if (DateTime.Now.ToFileTimeUtc() - this.lastTime < 0)
 		{ return; }
 
 		int obstacleNumber = Random.Range(0, this.obstaclePrefabs.Length - 1);
@@ -105,7 +101,7 @@ public class HorizontalRunner : MonoBehaviour
 		obstacle.characterCollider = this.character.collider;
 		obstacle.miniGame = this.miniGame;
 
-		this.lastTime = DateTime.Now.ToFileTimeUtc();
+		this.lastTime = DateTime.Now.ToFileTimeUtc() + Random.Range(this.obstacleCheckMin, this.obstacleCheckMax) * 10000;
 	}
 
 	// ReSharper disable once UnusedMember.Local

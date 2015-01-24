@@ -937,8 +937,8 @@ MonoBehaviour:
   jumpHeightModifier: 240
   maximumTimeOfJump: .300000012
   minimumTimeOfJump: .0500000007
-  obstacleCheck: 2000
-  obstacleThreshold: .970000029
+  obstacleCheckMin: 1000
+  obstacleCheckMax: 5000
   obstacleSpeed: 5
   characterFlickerTime: 1
   characterFlickerFrequency: .100000001

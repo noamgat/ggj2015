@@ -22,6 +22,7 @@ public class Obstacle : MonoBehaviour
 		{
 			this.particles.Play(); 
 			this.miniGame.NotifyLostLife();
+			this.collider.enabled = false;
 		}
 	}
 }
