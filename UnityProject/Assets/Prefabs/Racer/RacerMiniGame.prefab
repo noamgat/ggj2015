@@ -5901,7 +5901,7 @@ AudioSource:
   m_GameObject: {fileID: 110886}
   m_Enabled: 1
   serializedVersion: 3
-  m_audioClip: {fileID: 8300000, guid: 28621ccbcad500f44939e5af72686b40, type: 3}
+  m_audioClip: {fileID: 8300000, guid: e6a44b51149a44f4faefe8c856a52d90, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -5959,7 +5959,7 @@ AudioSource:
   m_GameObject: {fileID: 110886}
   m_Enabled: 1
   serializedVersion: 3
-  m_audioClip: {fileID: 8300000, guid: e0f38cbebb0074a4dbb686e4fef4e1ab, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 5aa748b15edaf3644b38042e98140e40, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -6636,6 +6636,7 @@ MonoBehaviour:
   audioHit: {fileID: 8248394}
   characterAnimation: {fileID: 9521678}
   groundRotator: {fileID: 11402522}
+  timeToStand: 1
 --- !u!114 &11462576
 MonoBehaviour:
   m_ObjectHideFlags: 1
