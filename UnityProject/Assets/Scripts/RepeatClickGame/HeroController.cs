@@ -10,6 +10,7 @@ public class HeroController : MonoBehaviour {
     public float safeScale = 3f;
     public float deadScale = 1.25f;
     public Transform heroAvatar;
+    public AudioSource lostLifeSource;
 
 	// Update is called once per frame
 	void LateUpdate () {
@@ -22,10 +23,11 @@ public class HeroController : MonoBehaviour {
 	}
 
     public void OnLostLife() {
+        lostLifeSource.Play();//
         for (int i = 0; i < 12; i++) {
             float delay = i * 0.12f;
             bool isVisible = (i % 2) == 1;
-            this.ExecuteWithDelay(delay, delegate() { hero.gameObject.SetActive(isVisible); });
+            this.ExecuteWithDelay(delay, delegate() { heroAvatar.gameObject.SetActive(isVisible); });
         }
     }
 

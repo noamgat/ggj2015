@@ -6,10 +6,10 @@ public class RepeatClickGameController : MonoBehaviour {
 
     public MiniGame miniGame;
     public Text timeLeftText;
-    public float initialTimeToLive = 10f;
-    public float clickBoost = 3f;
+    public float maxLife = 10f;
+    public float clickLoseLifeSpeed = 7f;
+    public float regainLifeSpeed = 2f;
     private float timeUntilLostLife;
-    private float selectedTimeToLive;
     public float respawnDuration = 1.5f;
     public RectTransform livesContainer;
     public RectTransform hitContainer;
@@ -20,7 +20,6 @@ public class RepeatClickGameController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        selectedTimeToLive = initialTimeToLive * Random.Range(1f, 2f);
         ResetTimer();
 	}
 
@@ -34,17 +33,17 @@ public class RepeatClickGameController : MonoBehaviour {
             UpdateDuringChase();
         }
         
-        timeLeftText.text = (timeUntilLostLife / clickBoost).ToString("0.0");
-        relativeSafety = timeUntilLostLife / selectedTimeToLive;
+        timeLeftText.text = (timeUntilLostLife / clickLoseLifeSpeed).ToString("0.0");
+        relativeSafety = timeUntilLostLife / maxLife;
         warningContainer.alpha = 1 - relativeSafety;
 	}
 
     private void UpdateDuringChase() {
         if (InputManager.GetButtonHeld) {
-            timeUntilLostLife -= clickBoost * Time.deltaTime;
+            timeUntilLostLife -= clickLoseLifeSpeed * Time.deltaTime;
         } else {
-            timeUntilLostLife += Time.deltaTime;
-            timeUntilLostLife = Mathf.Min(timeUntilLostLife, selectedTimeToLive);
+            timeUntilLostLife += regainLifeSpeed * Time.deltaTime;
+            timeUntilLostLife = Mathf.Min(timeUntilLostLife, maxLife);
         }
 
         if (timeUntilLostLife <= 0) {
@@ -56,15 +55,15 @@ public class RepeatClickGameController : MonoBehaviour {
     }
 
     private void UpdateDuringRespawn() {
-        timeUntilLostLife += selectedTimeToLive * (Time.deltaTime / respawnDuration);
-        if (timeUntilLostLife >= selectedTimeToLive) {
+        timeUntilLostLife += maxLife * (Time.deltaTime / respawnDuration);
+        if (timeUntilLostLife >= maxLife) {
             isRespawning = false;
         }
     }
 
 
     private void ResetTimer() {
-        timeUntilLostLife = selectedTimeToLive;	
+        timeUntilLostLife = maxLife;	
     }
 
     public void OnNumLivesChanged(int numLives) {
