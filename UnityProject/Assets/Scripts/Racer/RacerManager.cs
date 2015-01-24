@@ -74,9 +74,8 @@ public class RacerManager : MonoBehaviour {
         lastTimeOfSpawn = Time.time;
         nextTimeOfSpawnInterval = GetNextIntervalTime();
         Vector3 newPosition = new Vector3(
-            Random.Range(leftSpawnBorder.position.x, rightSpawnBorder.position.x),
-            Random.Range(leftSpawnBorder.position.y, rightSpawnBorder.position.y),
-            Random.Range(leftSpawnBorder.position.z, rightSpawnBorder.position.z)
+            (Random.Range(0,2) == 0 ? leftSpawnBorder.position.x : rightSpawnBorder.position.x),
+            leftSpawnBorder.position.y, leftSpawnBorder.position.z
             );
         
         (Instantiate(obstaclePrefabs[Random.Range(0, obstaclePrefabs.Count)], newPosition, Quaternion.identity) as GameObject).transform.parent = ground.transform;
