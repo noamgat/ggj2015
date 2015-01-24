@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class EndSceneLogic : MonoBehaviour {
 
-    public static int score;
+    public static float score;
 
     public RectTransform textHider;
     public Text scoreText;
@@ -19,7 +19,7 @@ public class EndSceneLogic : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         didPressButton = false;
-        scoreText.text = score.ToString();
+        scoreText.text = ((int)(score * 10)).ToString();
         startMenuTime = Time.realtimeSinceStartup;
 	}
 	
