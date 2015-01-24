@@ -3,13 +3,13 @@ using System.Collections;
 
 public class Cat : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+    public Animator catAnimation;
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Lismor")
+        {
+            catAnimation.SetBool("Scared", true);
+        }
+    }
 }
