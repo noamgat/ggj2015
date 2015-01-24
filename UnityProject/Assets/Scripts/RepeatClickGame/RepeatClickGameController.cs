@@ -12,6 +12,8 @@ public class RepeatClickGameController : MonoBehaviour {
     private float selectedTimeToLive;
     public float respawnDuration = 1.5f;
     public RectTransform livesContainer;
+    public RectTransform hitContainer;
+    public CanvasGroup warningContainer;
 
     //1 = Safe, 0 = Dead
     public float relativeSafety { get; private set; }
@@ -34,6 +36,7 @@ public class RepeatClickGameController : MonoBehaviour {
         
         timeLeftText.text = (timeUntilLostLife / clickBoost).ToString("0.0");
         relativeSafety = timeUntilLostLife / selectedTimeToLive;
+        warningContainer.alpha = 1 - relativeSafety;
 	}
 
     private void UpdateDuringChase() {
@@ -45,6 +48,8 @@ public class RepeatClickGameController : MonoBehaviour {
         }
 
         if (timeUntilLostLife <= 0) {
+            hitContainer.gameObject.SetActive(true);
+            this.ExecuteWithDelay(0.5f, delegate() { hitContainer.gameObject.SetActive(false); });
             miniGame.onLostLife.Invoke(miniGame);
             isRespawning = true;
         }
