@@ -1019,7 +1019,7 @@ MonoBehaviour:
   miniGame: {fileID: 11402406}
   timeLeftText: {fileID: 11402420}
   maxLife: 10
-  clickLoseLifeSpeed: 7
+  clickLoseLifeSpeed: 10
   regainLifeSpeed: 1
   respawnDuration: 1.5
   livesContainer: {fileID: 22455210}
