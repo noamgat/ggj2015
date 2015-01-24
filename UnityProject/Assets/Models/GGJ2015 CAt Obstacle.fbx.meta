@@ -67,6 +67,8 @@ ModelImporter:
     400060: Bone_009
     4300000: Cube
     7400000: ArmatureAction
+    7400002: Idle
+    7400004: Lismor
     9500000: //RootNode
     13700000: Cube
   materials:

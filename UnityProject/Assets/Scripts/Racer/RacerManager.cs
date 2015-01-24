@@ -35,8 +35,7 @@ public class RacerManager : MonoBehaviour {
     {
         car.transform.position = rightPosition.position;
         targetPosition = car.transform.position;
-        lastTimeOfSpawn = Time.time;
-        nextTimeOfSpawnInterval = GetNextIntervalTime();
+        GenerateNewObstacle();
     }
 
 	void Update () {
@@ -61,8 +60,6 @@ public class RacerManager : MonoBehaviour {
         // Generate new obstacles
         if (Time.time - lastTimeOfSpawn >= nextTimeOfSpawnInterval)
         {
-            lastTimeOfSpawn = Time.time;
-            nextTimeOfSpawnInterval = GetNextIntervalTime();
             GenerateNewObstacle();
         }
 	}
@@ -74,6 +71,8 @@ public class RacerManager : MonoBehaviour {
 
     void GenerateNewObstacle()
     {
+        lastTimeOfSpawn = Time.time;
+        nextTimeOfSpawnInterval = GetNextIntervalTime();
         Vector3 newPosition = new Vector3(
             Random.Range(leftSpawnBorder.position.x, rightSpawnBorder.position.x),
             Random.Range(leftSpawnBorder.position.y, rightSpawnBorder.position.y),
