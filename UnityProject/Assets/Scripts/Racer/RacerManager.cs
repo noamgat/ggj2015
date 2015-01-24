@@ -24,6 +24,10 @@ public class RacerManager : MonoBehaviour {
     public float maxTimeToSpawn;
     float lastTimeOfSpawn;
     float nextTimeOfSpawnInterval;
+    public Transform leftSpawnBorder;
+    public Transform rightSpawnBorder;
+
+    public GameObject ground;
 
     void Start()
     {
@@ -53,11 +57,27 @@ public class RacerManager : MonoBehaviour {
         car.transform.position = new Vector3(Mathf.Lerp(car.transform.position.x, targetPosition.x, Time.deltaTime * switchSpeed), car.transform.position.y, car.transform.position.z);
 
         // Generate new obstacles
-        
+        if (Time.time - lastTimeOfSpawn >= nextTimeOfSpawnInterval)
+        {
+            lastTimeOfSpawn = Time.time;
+            nextTimeOfSpawnInterval = GetNextIntervalTime();
+            GenerateNewObstacle();
+        }
 	}
 
     float GetNextIntervalTime()
     {
         return Random.Range(minTimeToSpawn, maxTimeToSpawn);
+    }
+
+    void GenerateNewObstacle()
+    {
+        Vector3 newPosition = new Vector3(
+            Random.Range(leftSpawnBorder.position.x, rightSpawnBorder.position.x),
+            Random.Range(leftSpawnBorder.position.y, rightSpawnBorder.position.y),
+            Random.Range(leftSpawnBorder.position.z, rightSpawnBorder.position.z)
+            );
+        
+        (Instantiate(obstaclePrefabs[Random.Range(0, obstaclePrefabs.Count)], newPosition, Quaternion.identity) as GameObject).transform.parent = ground.transform;
     }
 }

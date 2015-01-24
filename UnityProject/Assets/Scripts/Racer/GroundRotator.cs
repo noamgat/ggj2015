@@ -25,12 +25,19 @@ public class GroundRotator : MonoBehaviour {
 
     void Update()
     {
-        foreach (Transform obj in groundObjects)
+        foreach (Transform obj in transform)
         {
             obj.Translate(0, 0, -1 * speed * Time.deltaTime);
             if (obj.position.z <= endPos.z)
             {
-                obj.position = startPos - new Vector3(-obj.position.x,-obj.position.y,endPos.z - obj.position.z);
+                if (obj.GetComponent<DestroyOnRotate>() != null)
+                {
+                    Destroy(obj.gameObject);
+                }
+                else
+                {
+                    obj.position = startPos - new Vector3(-obj.position.x, -obj.position.y, endPos.z - obj.position.z);
+                }
             }
         }
     }
