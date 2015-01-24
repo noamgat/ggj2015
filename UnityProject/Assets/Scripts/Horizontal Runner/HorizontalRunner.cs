@@ -98,7 +98,7 @@ public class HorizontalRunner : MonoBehaviour
 		if (DateTime.Now.ToFileTimeUtc() - this.lastTime < 0)
 		{ return; }
 
-		int obstacleNumber = Random.Range(0, this.obstaclePrefabs.Length - 1);
+		int obstacleNumber = Random.Range(0, this.obstaclePrefabs.Length);
 		GameObject obstacleObject = (GameObject)Instantiate(this.obstaclePrefabs[obstacleNumber]);
 		obstacleObject.transform.parent = this.transform;
 		obstacleObject.transform.localPosition = new Vector3(this.obstacleStart, obstacleObject.transform.localPosition.y);
