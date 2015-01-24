@@ -30,6 +30,8 @@ public class RacerManager : MonoBehaviour {
     public GameObject ground;
 
     public RectTransform livesContainer;
+    public AudioSource audioFwoosh;
+    public AudioSource audioHit;
 
     void Start()
     {
@@ -43,6 +45,7 @@ public class RacerManager : MonoBehaviour {
         if (InputManager.GetButtonDown)
         {
             if (carPosition == Position.Left) carPosition = Position.Right; else carPosition = Position.Left;
+            audioFwoosh.Play();
         }
 
         if (carPosition != lastCarPosition)
