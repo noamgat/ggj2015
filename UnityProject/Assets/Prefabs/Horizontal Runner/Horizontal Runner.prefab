@@ -927,13 +927,18 @@ MonoBehaviour:
   character: {fileID: 100010}
   characterRigidBody: {fileID: 5400002}
   characterAnimator: {fileID: 9500000}
-  obstaclePrefab: {fileID: 100000, guid: 85d2d883c5e5f3a4a833fdcd6c5f2a6a, type: 2}
-  obstacleStart: {x: 26, y: .980000019, z: 0}
-  jumpHeightModifier: 200
+  obstaclePrefabs:
+  - {fileID: 100000, guid: d37029afd5469a84081feea823ed7395, type: 2}
+  - {fileID: 100000, guid: 34dd5e88d8b019c41838d990851beb75, type: 2}
+  - {fileID: 100000, guid: ec8664bab23a3e2429f31cd89f1075a1, type: 2}
+  - {fileID: 100000, guid: b1c2bb85dbafda440bc7371b703f6c05, type: 2}
+  - {fileID: 100000, guid: 09d82a37fa461624b8a6c366f27987cb, type: 2}
+  obstacleStart: 26
+  jumpHeightModifier: 240
   maximumTimeOfJump: .300000012
-  minimumTimeOfJump: .100000001
+  minimumTimeOfJump: .0500000007
   obstacleCheck: 2000
-  obstacleThreshold: .949999988
+  obstacleThreshold: .970000029
   obstacleSpeed: 5
   characterFlickerTime: 1
   characterFlickerFrequency: .100000001

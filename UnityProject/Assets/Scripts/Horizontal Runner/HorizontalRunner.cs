@@ -3,16 +3,17 @@ using System.Collections;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class HorizontalRunner : MonoBehaviour 
+public class HorizontalRunner : MonoBehaviour
 {
+	#region public fields
 	public Camera ownCamera = null;
 	public MiniGame miniGame = null;
 	public RectTransform livesContainer = null;
 	public GameObject character = null;
 	public Rigidbody characterRigidBody = null;
 	public Animator characterAnimator = null;
-	public GameObject obstaclePrefab = null;
-	public Vector3 obstacleStart = new Vector3(4f, 0.98f, 0f);
+	public GameObject[] obstaclePrefabs = null;
+	public float obstacleStart = 26f;
 	public float jumpHeightModifier = 200f;
 	public float maximumTimeOfJump = 0.3f; // in seconds
 	public float minimumTimeOfJump = 0.1f;
@@ -21,13 +22,16 @@ public class HorizontalRunner : MonoBehaviour
 	public float obstacleSpeed = 5f;
 	public float characterFlickerTime = 1f;
 	public float characterFlickerFrequency = 0.1f;
+	#endregion
 
+	#region private fields
 	private float jumpTime;
 	private float originalY;
 	private bool jumping;
 	private bool allowPress = true;
 	private bool killJump;
 	private long lastTime;
+	#endregion
 
 	// ReSharper disable once UnusedMember.Local
 	void Start () 
@@ -48,7 +52,7 @@ public class HorizontalRunner : MonoBehaviour
 
 	private void HandleJump()
 	{
-		this.killJump = this.jumpTime < 0 || InputManager.GetButtonUp || this.killJump;
+		this.killJump = this.jumpTime < 0 || !InputManager.GetButtonHeld || this.killJump;
 
 		//Debug.Log(string.Format("Allowed: {0}; Jumping: {1}; KillJump: {5}; JumpTime: {2}\n" +
 		//						"OriginalY: {3}; Y: {4};", 
@@ -56,7 +60,7 @@ public class HorizontalRunner : MonoBehaviour
 		//						this.character.transform.localPosition.y, killJump));
 
 		// respond to click
-		if (InputManager.GetButtonDown && this.jumpTime > 0 && this.allowPress)
+		if (InputManager.GetButtonHeld && this.jumpTime > 0 && this.allowPress)
 		{
 			this.jumping = true;
 			this.characterAnimator.SetTrigger("Jump");
@@ -67,6 +71,7 @@ public class HorizontalRunner : MonoBehaviour
 		{
 			this.jumping = false;
 			this.allowPress = false;
+			this.characterAnimator.ResetTrigger("Jump");
 		}
 
 		if (Math.Sign(this.characterRigidBody.velocity.y) == -1)
@@ -84,16 +89,17 @@ public class HorizontalRunner : MonoBehaviour
 
 	private void RandomObstacle()
 	{
-		float randomChance = Random.Range(0f, 1f);
-		if (DateTime.Now.ToFileTimeUtc() - this.lastTime < this.obstacleCheck * 10000 || randomChance < this.obstacleThreshold)
+		if (DateTime.Now.ToFileTimeUtc() - this.lastTime < this.obstacleCheck * 10000)
 		{ return; }
-		//Debug.Log("Random: " + randomChance + "; Time Difference: " + (DateTime.Now.ToFileTimeUtc() - this.lastTime) / 10000);
+		float randomChance = Random.Range(0f, 1f);
+		//Debug.Log(string.Format("Horizontal Runner: Chance of Obstacle is {0}", randomChance));
+		if (randomChance < this.obstacleThreshold)
+		{ return; }
 
-		GameObject obstacleObject = (GameObject)Instantiate(this.obstaclePrefab);
+		int obstacleNumber = Random.Range(0, this.obstaclePrefabs.Length - 1);
+		GameObject obstacleObject = (GameObject)Instantiate(this.obstaclePrefabs[obstacleNumber]);
 		obstacleObject.transform.parent = this.transform;
-		float randomSize = Random.Range(0.5f, 1.5f);
-		obstacleObject.transform.localScale = new Vector3(randomSize, randomSize);
-		obstacleObject.transform.localPosition = this.obstacleStart - new Vector3(0f, (1f - randomSize) / 2);
+		obstacleObject.transform.localPosition = new Vector3(this.obstacleStart, obstacleObject.transform.localPosition.y);
 		obstacleObject.GetComponent<Rigidbody>().AddForce(Vector3.left * this.obstacleSpeed, ForceMode.VelocityChange);
 		Obstacle obstacle = obstacleObject.GetComponent<Obstacle>();
 		obstacle.characterCollider = this.character.collider;
