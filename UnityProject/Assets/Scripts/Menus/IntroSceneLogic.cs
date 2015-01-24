@@ -22,6 +22,7 @@ public class IntroSceneLogic : MonoBehaviour {
             textHider.gameObject.SetActive(shouldShowTextHider);
             if (InputManager.GetButtonDown) {
                 didPressButton = true;
+                audio.Play();
                 for (int i = 0; i < numBlinks; i++) {
                     float delay = i * selectBlinkTime;
                     bool isVisible = (i % 2) == 1;
