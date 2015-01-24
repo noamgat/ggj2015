@@ -11,6 +11,7 @@ public class MultiGame : MonoBehaviour {
     public float transitionDuration = 2f;
     public float instructionTextTime = 5f;
     public RectTransform instructionText;
+    public Text scoreText;
 
     [System.Serializable]
     public class StageConfiguration
@@ -58,6 +59,7 @@ public class MultiGame : MonoBehaviour {
             currentStage = newCurrentStage;
             UpdateStagesFromConfiguration();
         }
+        scoreText.text = Mathf.FloorToInt(10 * (Time.realtimeSinceStartup - startTime)).ToString();
     }
 
     private void UpdateStagesFromConfiguration() {
