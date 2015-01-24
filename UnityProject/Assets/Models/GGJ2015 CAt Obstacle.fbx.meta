@@ -33,6 +33,7 @@ ModelImporter:
     100054: Bone_R_003
     100056: Cube
     100058: //RootNode
+    100060: Bone_009
     400000: Armature
     400002: Bone
     400004: Bone_001
@@ -63,6 +64,7 @@ ModelImporter:
     400054: Bone_R_003
     400056: Cube
     400058: //RootNode
+    400060: Bone_009
     4300000: Cube
     7400000: ArmatureAction
     9500000: //RootNode
