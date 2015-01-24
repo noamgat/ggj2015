@@ -4,6 +4,8 @@ using Random = UnityEngine.Random;
 
 public class HorizontalRunner : MonoBehaviour 
 {
+	public Camera ownCamera = null;
+	public MiniGame miniGame = null;
 	public GameObject character = null;
 	public Rigidbody characterRigidBody = null;
 	public Animator characterAnimator = null;
@@ -76,7 +78,7 @@ public class HorizontalRunner : MonoBehaviour
 		}
 	}
 
-	void RandomObstacle()
+	private void RandomObstacle()
 	{
 		float randomChance = Random.Range(0f, 1f);
 		if (DateTime.Now.ToFileTimeUtc() - this.lastTime < this.obstacleCheck * 10000 || randomChance < this.obstacleThreshold)
@@ -91,7 +93,7 @@ public class HorizontalRunner : MonoBehaviour
 		obstacleObject.GetComponent<Rigidbody>().AddForce(Vector3.left * this.obstacleSpeed, ForceMode.VelocityChange);
 		Obstacle obstacle = obstacleObject.GetComponent<Obstacle>();
 		obstacle.characterCollider = this.character.collider;
-		obstacle.miniGame = this.character.GetComponent<MiniGame>();
+		obstacle.miniGame = this.miniGame;
 
 		this.lastTime = DateTime.Now.ToFileTimeUtc();
 	}
@@ -102,5 +104,7 @@ public class HorizontalRunner : MonoBehaviour
 		this.HandleJump();
 
 		this.RandomObstacle();
+
+		this.ownCamera.transform.localPosition = new Vector3((1f - this.ownCamera.rect.height) * 14f, 4f, -10f);
 	}
 }
