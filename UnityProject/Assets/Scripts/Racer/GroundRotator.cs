@@ -6,6 +6,9 @@ public class GroundRotator : MonoBehaviour {
 
     public Transform rotatePoint;
     public float speed;
+    float currentSpeed;
+
+    public float firstSpeed { get; private set; }
 
     public Transform rotateToPoint;
 
@@ -21,13 +24,16 @@ public class GroundRotator : MonoBehaviour {
         {
             groundObjects.Add(child);
         }
+        currentSpeed = 0;
+        firstSpeed = speed;
     }
 
     void Update()
     {
+        if (currentSpeed != speed) currentSpeed = Mathf.Lerp(currentSpeed, speed, Time.deltaTime * 10);
         foreach (Transform obj in transform)
         {
-            obj.Translate(0, 0, -1 * speed * Time.deltaTime);
+            obj.Translate(0, 0, -1 * currentSpeed * Time.deltaTime);
             if (obj.position.z <= endPos.z)
             {
                 if (obj.GetComponent<DestroyOnRotate>() != null)

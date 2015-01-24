@@ -33,6 +33,13 @@ public class RacerManager : MonoBehaviour {
     public AudioSource audioFwoosh;
     public AudioSource audioHit;
 
+    public Animator characterAnimation;
+    public GroundRotator groundRotator;
+
+    bool isBeingHit;
+    float hitStarted;
+    public float timeToStand;
+
     void Start()
     {
         car.transform.position = rightPosition.position;
@@ -41,6 +48,11 @@ public class RacerManager : MonoBehaviour {
     }
 
 	void Update () {
+        if (isBeingHit) HitUpdate(); else RunUpdate();
+	}
+
+    void RunUpdate()
+    {
         // Set new position on click
         if (InputManager.GetButtonDown)
         {
@@ -65,7 +77,17 @@ public class RacerManager : MonoBehaviour {
         {
             GenerateNewObstacle();
         }
-	}
+    }
+
+    void HitUpdate()
+    {
+        if (timeToStand < (Time.time - hitStarted))
+        {
+            isBeingHit = false;
+            groundRotator.speed = groundRotator.firstSpeed;
+            characterAnimation.SetBool("Fall", false);
+        }
+    }
 
     float GetNextIntervalTime()
     {
@@ -90,5 +112,15 @@ public class RacerManager : MonoBehaviour {
         {
             livesContainer.GetChild(i).gameObject.SetActive(i < numLives);
         }
+    }
+
+    public void GotHit()
+    {
+        audioHit.Play();
+        miniGame.NotifyLostLife();
+        groundRotator.speed = 0;
+        characterAnimation.SetBool("Fall", true);
+        isBeingHit = true;
+        hitStarted = Time.time;
     }
 }

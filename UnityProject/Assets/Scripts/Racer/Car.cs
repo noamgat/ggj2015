@@ -10,7 +10,7 @@ public class Car : MonoBehaviour {
         explosionPrefab.transform.position = transform.position;
         if (explosionPrefab.isPlaying) explosionPrefab.Stop();
         explosionPrefab.Play();
-        manager.audioHit.Play();
-        manager.miniGame.NotifyLostLife();
+        manager.GotHit();
+        Destroy(collision.transform.parent.gameObject);
     }
 }
