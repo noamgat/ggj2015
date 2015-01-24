@@ -5,6 +5,7 @@ public class BackgroundShifter : MonoBehaviour
 {
 	[Tooltip("This is the one on the right.")]
 	public Transform leadBackground;
+	public Transform midBackground;
 	[Tooltip("This is the one on the left.")]
 	public Transform followingBackground;
 	[Tooltip("At one point of the lead is the following out of view.")]
@@ -16,13 +17,15 @@ public class BackgroundShifter : MonoBehaviour
 	void Update () 
 	{
 		this.leadBackground.localPosition += Vector3.left * Time.deltaTime * this.transitSpeedModifier;
+		this.midBackground.localPosition += Vector3.left * Time.deltaTime * this.transitSpeedModifier;
 		this.followingBackground.localPosition += Vector3.left * Time.deltaTime * this.transitSpeedModifier;
 
-		if (this.leadBackground.localPosition.x < this.leadBackgroundXThreshold)
+		if (this.midBackground.localPosition.x < this.leadBackgroundXThreshold)
 		{
-			this.followingBackground.localPosition += new Vector3(this.shiftJumpLength, 0f);
+			this.followingBackground.localPosition += Vector3.right * this.shiftJumpLength * 3f;
 			Transform tempHolder = this.followingBackground;
-			this.followingBackground = this.leadBackground;
+			this.followingBackground = this.midBackground;
+			this.midBackground = this.leadBackground;
 			this.leadBackground = tempHolder;
 		}
 	}
