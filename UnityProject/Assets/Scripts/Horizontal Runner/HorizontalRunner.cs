@@ -57,7 +57,7 @@ public class HorizontalRunner : MonoBehaviour
 	{
 		this.killJump = this.jumpTime < 0 || !InputManager.GetButtonHeld || this.killJump;
 
-		if (InputManager.GetButtonDown)
+		if (InputManager.GetButtonDown && !this.jumping && this.allowPress)
 		{ this.characterJumpAudioSource.Play(); }
 
 		//Debug.Log(string.Format("Allowed: {0}; Jumping: {1}; KillJump: {5}; JumpTime: {2}\n" +
@@ -109,11 +109,15 @@ public class HorizontalRunner : MonoBehaviour
 		obstacle.characterAudioSource = this.characterHitAudioSource;
 
 		this.lastTime = DateTime.Now.ToFileTimeUtc() + Random.Range(this.obstacleCheckMin, this.obstacleCheckMax) * 10000;
-		this.obstacleCheckMax -= this.perObstacleMaxDegredationRate;
-		if (this.obstacleCheckMax < 0)
-		{ this.obstacleCheckMax = 0; }
-		if (this.obstacleCheckMax < this.obstacleCheckMin)
-		{ this.obstacleCheckMin = this.obstacleCheckMax; }
+
+		if (Time.time > 30f)
+		{
+			this.obstacleCheckMax -= this.perObstacleMaxDegredationRate;
+			if (this.obstacleCheckMax < 500)
+			{ this.obstacleCheckMax = 500; }
+			if (this.obstacleCheckMax < this.obstacleCheckMin)
+			{ this.obstacleCheckMin = this.obstacleCheckMax; }
+		}
 	}
 
 	// ReSharper disable once UnusedMember.Local

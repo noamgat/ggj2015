@@ -2,9 +2,9 @@
 
 public class Obstacle : MonoBehaviour 
 {
-	public Collider characterCollider;
-	public MiniGame miniGame;
-	public AudioSource characterAudioSource;
+	[HideInInspector]public Collider characterCollider;
+	[HideInInspector]public MiniGame miniGame;
+	[HideInInspector]public AudioSource characterAudioSource;
 	public ParticleSystem particles = null;
 	public float leftEdgeDestructionThreshold = -11f;
 
