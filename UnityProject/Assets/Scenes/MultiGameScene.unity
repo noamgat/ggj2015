@@ -192,7 +192,7 @@ MonoBehaviour:
       width: 1
       height: 1
     timeInStage: 13
-    instructionText: Jump over the obstacles!
+    instructionText: Long / Short press to jump
   - minigameViewports:
     - serializedVersion: 2
       x: 0
@@ -205,7 +205,7 @@ MonoBehaviour:
       width: 1
       height: .5
     timeInStage: 13
-    instructionText: Avoid the obstacles!
+    instructionText: Press to switch lanes
   - minigameViewports:
     - serializedVersion: 2
       x: 0
@@ -223,7 +223,7 @@ MonoBehaviour:
       width: .5
       height: .5
     timeInStage: 5000
-    instructionText: Don't push too much!
+    instructionText: Press too much and the monster will bite!
 --- !u!1 &190833877
 GameObject:
   m_ObjectHideFlags: 0
