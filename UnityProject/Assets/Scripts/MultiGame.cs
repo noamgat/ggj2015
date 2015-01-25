@@ -29,6 +29,10 @@ public class MultiGame : MonoBehaviour {
 	void Start () {
         startTime = Time.realtimeSinceStartup;
         miniGames = new MiniGame[miniGamePrefabs.Length];
+        for (int i = 0; i < miniGamePrefabs.Length; i++) {
+            miniGames[i] = GameObject.Instantiate(miniGamePrefabs[i]) as MiniGame;
+            miniGames[i].gameObject.SetActive(false);
+        }
         currentStage = GetCurrentStage();
         UpdateStagesFromConfiguration();
 	}
@@ -67,8 +71,8 @@ public class MultiGame : MonoBehaviour {
         bool inTransition = !Mathf.Approximately(baseStage, currentStage);
         StageConfiguration config = stageConfigurations[baseStage];
         for (int i = 0; i < config.minigameViewports.Length; i++) {
-            if (miniGames[i] == null) {
-                miniGames[i] = GameObject.Instantiate(miniGamePrefabs[i]) as MiniGame;
+            if (miniGames[i].gameObject.activeSelf == false) {
+                miniGames[i].gameObject.SetActive(true);
                 miniGames[i].mainCamera.rect = config.minigameViewports[i];
                 miniGames[i].onLostLife.AddListener(this.OnMiniGameLostLife);
                 miniGames[i].NotifyLifeTotalChanged(numLives);
@@ -97,7 +101,7 @@ public class MultiGame : MonoBehaviour {
         numLives--;
         Debug.Log("Lost life!");
         for (int i = 0; i < miniGames.Length; i++) {
-            if (miniGames[i] != null) miniGames[i].NotifyLifeTotalChanged(numLives);
+            if (miniGames[i].gameObject.activeSelf) miniGames[i].NotifyLifeTotalChanged(numLives);
         }
         if (numLives == 0) {
             Debug.Log("You Lose!");
