@@ -371,7 +371,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   introSource: {fileID: 190833879}
   loopSource: {fileID: 190833878}
-  sharedBufferTime: .200000003
+  sharedBufferTime: .0299999993
 --- !u!4 &190833881
 Transform:
   m_ObjectHideFlags: 0

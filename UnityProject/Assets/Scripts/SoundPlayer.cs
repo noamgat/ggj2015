@@ -9,6 +9,11 @@ public class SoundPlayer : MonoBehaviour {
 	// Update is called once per frame
 	void Start () {
         introSource.Play();
-        this.ExecuteWithDelay(introSource.clip.length - sharedBufferTime, delegate() { loopSource.Play(); });
 	}
+
+    void Update() {
+        if (!loopSource.isPlaying && (!introSource.isPlaying || introSource.time > introSource.clip.length - sharedBufferTime)) {
+            loopSource.Play();
+        }
+    }
 }
