@@ -27,7 +27,7 @@ public class MultiGame : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        startTime = Time.realtimeSinceStartup;
+        startTime = Time.time;
         miniGames = new MiniGame[miniGamePrefabs.Length];
         for (int i = 0; i < miniGamePrefabs.Length; i++) {
             miniGames[i] = GameObject.Instantiate(miniGamePrefabs[i]) as MiniGame;
@@ -38,7 +38,7 @@ public class MultiGame : MonoBehaviour {
 	}
 
     private float GetCurrentStage() {
-        float timeLeftToCount = Time.realtimeSinceStartup - startTime;
+        float timeLeftToCount = Time.time - startTime;
         int baseStage = 0;
         float currentStage = 0;
         while (baseStage < stageConfigurations.Length - 1) {
@@ -63,7 +63,7 @@ public class MultiGame : MonoBehaviour {
             currentStage = newCurrentStage;
             UpdateStagesFromConfiguration();
         }
-        scoreText.text = Mathf.FloorToInt(10 * (Time.realtimeSinceStartup - startTime)).ToString();
+        scoreText.text = Mathf.FloorToInt(10 * (Time.time - startTime)).ToString();
     }
 
     private void UpdateStagesFromConfiguration() {
@@ -105,7 +105,7 @@ public class MultiGame : MonoBehaviour {
         }
         if (numLives == 0) {
             Debug.Log("You Lose!");
-            EndSceneLogic.score = Time.realtimeSinceStartup - startTime;
+            EndSceneLogic.score = Time.time - startTime;
             Application.LoadLevel("EndScene");
         }
     }
