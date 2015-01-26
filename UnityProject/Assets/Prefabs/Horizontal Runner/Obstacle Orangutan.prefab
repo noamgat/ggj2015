@@ -58,8 +58,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.6787262, y: 1.32895613, z: 1}
-  m_Center: {x: .0666828156, y: -.190434098, z: 0}
+  m_Size: {x: 1.90999997, y: 1.23000002, z: 1}
+  m_Center: {x: .0666828156, y: -.230000004, z: 0}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -73,6 +73,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterCollider: {fileID: 0}
   miniGame: {fileID: 0}
+  characterAudioSource: {fileID: 0}
   particles: {fileID: 19800000}
   leftEdgeDestructionThreshold: -12
 --- !u!198 &19800000

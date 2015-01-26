@@ -8,6 +8,7 @@ public class EndSceneLogic : MonoBehaviour {
 
     public RectTransform[] textHiders;
     public Text scoreText;
+    public Text highScoreText;
 
     public float idleBlinkTime = 1f;
     public float selectBlinkTime = 0.12f;
@@ -21,7 +22,18 @@ public class EndSceneLogic : MonoBehaviour {
     private float startMenuTime;
 	// Use this for initialization
 	void Start () {
-        scoreText.text = ((int)(score * 10)).ToString();
+        int finalscore = ((int)(score * 10));
+        scoreText.text = finalscore.ToString();
+        if (PlayerPrefs.HasKey("highscore") &&
+            PlayerPrefs.GetInt("highscore") > finalscore)
+        {
+            highScoreText.text = PlayerPrefs.GetInt("highscore").ToString();
+        }
+        else
+        {
+            PlayerPrefs.SetInt("highscore", finalscore);
+            highScoreText.text = finalscore.ToString();
+        }
         SetCurrentPart(0);
 	}
 
