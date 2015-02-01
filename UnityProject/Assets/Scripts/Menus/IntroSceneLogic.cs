@@ -13,6 +13,9 @@ public class IntroSceneLogic : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         didPressButton = false;
+#if UNITY_ANDROID //&& !UNITY_EDITOR
+        Social.localUser.Authenticate(delegate(bool success) {Debug.Log("Authentication: " + success);});
+#endif
 	}
 	
 	// Update is called once per frame
