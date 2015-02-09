@@ -1,9 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
+using GooglePlayGames;
+using GooglePlayGames.BasicApi;
 
 public class IntroSceneLogic : MonoBehaviour {
 
     public RectTransform textHider;
+    public static bool isAuthenticated = false;
 
     public float idleBlinkTime = 1f;
     public float selectBlinkTime = 0.12f;
@@ -13,8 +16,16 @@ public class IntroSceneLogic : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         didPressButton = false;
-#if UNITY_ANDROID //&& !UNITY_EDITOR
-        Social.localUser.Authenticate(delegate(bool success) {Debug.Log("Authentication: " + success);});
+        #if UNITY_ANDROID //&& !UNITY_EDITOR
+        if (!isAuthenticated)
+        {
+            PlayGamesClientConfiguration config = new PlayGamesClientConfiguration.Builder().Build();
+            PlayGamesPlatform.InitializeInstance(config);
+            PlayGamesPlatform.DebugLogEnabled = true;
+            PlayGamesPlatform.Activate();
+
+            Social.localUser.Authenticate(delegate(bool success) { Debug.Log("Authentication: " + success); isAuthenticated = true; });
+        }
 #endif
 	}
 	

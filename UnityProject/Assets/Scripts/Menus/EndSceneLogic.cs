@@ -6,6 +6,8 @@ public class EndSceneLogic : MonoBehaviour {
 
     public static float score;
 
+    public GameObject LeaderboardIcon;
+
     public RectTransform[] textHiders;
     public Text scoreText;
     public Text highScoreText;
@@ -34,6 +36,12 @@ public class EndSceneLogic : MonoBehaviour {
             PlayerPrefs.SetInt("highscore", finalscore);
             highScoreText.text = finalscore.ToString();
         }
+#if UNITY_ANDROID
+        Social.ReportScore(finalscore,"CgkIqbal4rgKEAIQAA", (bool success) => {
+        Debug.Log("Score of " + finalscore + " was posted successfully? " + success);
+        LeaderboardIcon.SetActive(true);
+    });
+#endif
         SetCurrentPart(0);
 	}
 
@@ -61,7 +69,7 @@ public class EndSceneLogic : MonoBehaviour {
         if (!didPressButton) {
             bool shouldShowTextHider = Mathf.FloorToInt(Time.realtimeSinceStartup / idleBlinkTime) % 2 == 0;
             SetTextHidersVisible(shouldShowTextHider);
-            if (InputManager.GetButtonDown) {
+            if (InputManager.GetButtonUp) {
                 didPressButton = true;
                 for (int i = 0; i < numBlinks; i++) {
                     float delay = i * selectBlinkTime;
@@ -77,4 +85,10 @@ public class EndSceneLogic : MonoBehaviour {
             }
         }
 	}
+
+    void OpenLeaderboardUI ()
+    {
+        Debug.Log("Opening leaderboards");
+         Social.ShowAchievementsUI();
+    }
 }
